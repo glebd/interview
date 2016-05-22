@@ -7,14 +7,18 @@
 
 using namespace std;
 
-TEST_CASE("racecar") {
+string longest_palindrome(const string& s) {
+  return "";
+}
 
+TEST_CASE("racecar") {
+  CHECK(longest_palindrome("racecar") == "racecar");
 }
 
 TEST_CASE("racecars") {
-
+  CHECK(longest_palindrome("racecars") == "racecar");
 }
 
 TEST_CASE("kayak racecars") {
-
+  CHECK(longest_palindrome("kayak racecars") == "racecar");
 }
