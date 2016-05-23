@@ -9,16 +9,17 @@ using namespace std;
 
 // Calculates length of the palindrome centered at the passed string range.
 // The length will be at least 1 as a single letter is a palindrome.
-string longest_palindrome_at_index(const string& s, size_t center_index) {
+string longest_palindrome_at_index(const string& s, size_t center_index, size_t initial_length) {
   if (s.length() <= 1) return s;
   size_t left = center_index;
-  size_t right = center_index;
+  // Support both even and odd-length palindromes
+  size_t right = min(center_index + initial_length - 1, s.length() - 1);
   // Check for even-length palindromes that have 2 chars in the middle
   if (center_index < s.length() - 1 && s[center_index + 1] == s[center_index]) {
     ++right;
   }
   // Expand palindrome range until we either hit the string bounds or the result is not a palindrome
-  while (left > 0 && right < s.length() - 1) {
+  while (s[left] == s[right] && left > 0 && right < s.length() - 1) {
     if (s[left - 1] != s[right + 1]) break;
     --left;
     ++right;
@@ -29,7 +30,13 @@ string longest_palindrome_at_index(const string& s, size_t center_index) {
 string longest_palindrome(const string& s) {
   string pal;
   for (size_t i = 0; i < s.length(); ++i) {
-    auto p = longest_palindrome_at_index(s, i);
+    auto p = longest_palindrome_at_index(s, i, 1);
+    if (p.length() > pal.length()) {
+      pal = p;
+    }
+  }
+  for (size_t i = 0; i < s.length() - 1; ++i) {
+    auto p = longest_palindrome_at_index(s, i, 2);
     if (p.length() > pal.length()) {
       pal = p;
     }
@@ -53,6 +60,6 @@ TEST_CASE("naan baobab") {
   CHECK(longest_palindrome("naan baobab") == "naan");
 }
 
-TEST_CASE("aa bbbbbbbbb cc") {
-  CHECK(longest_palindrome("aa bbbbbbbbb cc") == "bbbbbbbbb");
+TEST_CASE("aabbbbbbbbbcc") {
+  CHECK(longest_palindrome("aabbbbbbbbbcc") == "bbbbbbbbb");
 }
