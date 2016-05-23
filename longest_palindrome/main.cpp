@@ -18,8 +18,8 @@ string longest_palindrome_at_index(const string& s, size_t center_index) {
     ++right;
   }
   // Expand palindrome range until we either hit the string bounds or the result is not a palindrome
-  while (right < s.length() && s[left] == s[right]) {
-    if (left == 0) break;
+  while (s[left] == s[right] && left > 0 && right < s.length() - 1) {
+    if (s[left - 1] != s[right + 1]) break;
     --left;
     ++right;
   }
