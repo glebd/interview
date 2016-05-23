@@ -14,10 +14,6 @@ string longest_palindrome_at_index(const string& s, size_t center_index, size_t 
   size_t left = center_index;
   // Support both even and odd-length palindromes
   size_t right = min(center_index + initial_length - 1, s.length() - 1);
-  // Check for even-length palindromes that have 2 chars in the middle
-  if (center_index < s.length() - 1 && s[center_index + 1] == s[center_index]) {
-    ++right;
-  }
   // Expand palindrome range until we either hit the string bounds or the result is not a palindrome
   while (s[left] == s[right] && left > 0 && right < s.length() - 1) {
     if (s[left - 1] != s[right + 1]) break;
