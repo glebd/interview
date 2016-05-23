@@ -23,7 +23,7 @@ string longest_palindrome_at_index(const string& s, size_t center_index) {
     --left;
     ++right;
   }
-  return s.substr(left, right - left);
+  return s.substr(left, right - left + 1);
 }
 
 string longest_palindrome(const string& s) {
