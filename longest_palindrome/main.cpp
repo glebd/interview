@@ -52,3 +52,7 @@ TEST_CASE("kayak racecars") {
 TEST_CASE("naan baobab") {
   CHECK(longest_palindrome("naan baobab") == "naan");
 }
+
+TEST_CASE("aa bbbbbbbbb cc") {
+  CHECK(longest_palindrome("aa bbbbbbbbb cc") == "bbbbbbbbb");
+}
