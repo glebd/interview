@@ -59,3 +59,11 @@ TEST_CASE("naan baobab") {
 TEST_CASE("aabbbbbbbbbcc") {
   CHECK(longest_palindrome("aabbbbbbbbbcc") == "bbbbbbbbb");
 }
+
+TEST_CASE("AABCDCBA") {
+  CHECK(longest_palindrome("AABCDCBA") == "ABCDCBA");
+}
+
+TEST_CASE("DEFABCBAYT") {
+  CHECK(longest_palindrome("DEFABCBAYT") == "ABCBA");
+}
