@@ -11,7 +11,7 @@
 
 using namespace std;
 
-std::string encode(const std::string & input) {
+std::string encode(const std::string& input) {
   char lastChar = 0;
   int count = 0;
   std::string result;
