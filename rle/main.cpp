@@ -14,8 +14,8 @@ using namespace std;
 std::string encode(const std::string& input) {
   char lastChar = 0;
   int count = 0;
-  std::string result;
-  std::ostringstream os(result);
+  std::ostringstream os;
+
   for (char ch : input) {
     if (lastChar != 0 && ch == lastChar) {
       ++count;
