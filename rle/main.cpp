@@ -17,20 +17,29 @@ std::string encode(const std::string& input) {
   std::ostringstream os;
 
   for (char ch : input) {
-    if (lastChar != 0 && ch == lastChar) {
+    if (lastChar == 0) {
+      lastChar = ch;
+      count = 1;
+    } else if (ch == lastChar) {
       ++count;
     } else {
-      if (count == 0) {
-        os << ch;
-      } else if (count == 1) {
+      if (count == 1) {
         os << lastChar;
-      } else if (count > 0) {
+      } else {
         os << count << lastChar;
       }
       lastChar = ch;
       count = 1;
     }
   }
+
+  // Output the remaining character
+  if (count == 1) {
+    os << lastChar;
+  } else if (count > 1) {
+    os << count << lastChar;
+  }
+
   return os.str();
 }
 
