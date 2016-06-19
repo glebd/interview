@@ -6,9 +6,11 @@
  */
 
 #include <iostream>
+
+#include <gtest/gtest.h>
+
 using namespace std;
 
-int main() {
-  cout << "Hello, World!" << endl;
-  return 0;
+TEST(basic_check, test_all_unique) {
+  EXPECT_EQ(1, 1);
 }
