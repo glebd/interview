@@ -1,10 +1,8 @@
-Interview Playground
-====================
+# Interview Playground
 
 This repository contains various interview challenge solutions.
 
-Licence
-=======
+# Licence
 
 The MIT License (MIT)
 
