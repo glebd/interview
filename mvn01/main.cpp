@@ -23,6 +23,16 @@ int power2(int exp)
     return result;
 }
 
+int numBits(int n)
+{
+    int bits = 0;
+    for (int i = 0; i < sizeof(n); ++i) {
+        if (n & 1<<i)
+            ++bits;
+    }
+    return bits;
+}
+
 int solve(const vector<int>& input)
 {
     int acc = 0;
@@ -45,6 +55,26 @@ TEST_CASE("Power2 test 2")
 TEST_CASE("Power2 test 3")
 {
     CHECK(power2(3) == 8);
+}
+
+TEST_CASE("NumBits test 0")
+{
+    CHECK(numBits(0) == 0);
+}
+
+TEST_CASE("NumBits test 1")
+{
+    CHECK(numBits(1) == 1);
+}
+
+TEST_CASE("NumBits test 2")
+{
+    CHECK(numBits(2) == 1);
+}
+
+TEST_CASE("NumBits test 3")
+{
+    CHECK(numBits(3) == 2);
 }
 
 //TEST_CASE("Sample 1")
