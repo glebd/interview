@@ -39,7 +39,8 @@ int solve(const vector<int>& input)
     for_each(begin(input), end(input), [&acc](int elem) {
         acc += power2(elem);
     });
-    return 0;
+    acc *= 3;
+    return numBits(acc);
 }
 
 TEST_CASE("Power2 test 1")
