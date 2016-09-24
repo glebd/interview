@@ -26,7 +26,7 @@ int power2(int exp)
 int numBits(int n)
 {
     int bits = 0;
-    for (int i = 0; i < sizeof(n); ++i) {
+    for (int i = 0; i < sizeof(n) * 8; ++i) {
         if (n & 1<<i)
             ++bits;
     }
@@ -78,9 +78,35 @@ TEST_CASE("NumBits test 3")
     CHECK(numBits(3) == 2);
 }
 
-//TEST_CASE("Sample 1")
-//{
-//    vector<int> input{2};
-//    auto actual = solve(input);
-//    CHECK()
-//}
+TEST_CASE("NumBits test 4")
+{
+    CHECK(numBits(1024) == 1);
+}
+
+TEST_CASE("Sample 1")
+{
+    vector<int> input{0};
+    auto actual = solve(input);
+    CHECK(actual == 2);
+}
+
+TEST_CASE("Sample 2")
+{
+    vector<int> input{1};
+    auto actual = solve(input);
+    CHECK(actual == 2);
+}
+
+TEST_CASE("Sample 3")
+{
+    vector<int> input{1, 2, 10};
+    auto actual = solve(input);
+    CHECK(actual == 4);
+}
+
+TEST_CASE("Sample 4")
+{
+    vector<int> input{2, 3, 5};
+    auto actual = solve(input);
+    CHECK(actual == 2);
+}
