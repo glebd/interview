@@ -11,7 +11,20 @@
 
 using namespace std;
 
-int binarian(const vector<int> input)
+int power2(int exp)
 {
-    return 0;
+    int result = 1;
+    for (int i = 1; i <= exp; ++i) {
+        result *= 2;
+    }
+    return result;
+}
+
+int binarian(const vector<int>& input)
+{
+    int acc = 0;
+    for_each(begin(input), end(input), [&acc](int elem) {
+        acc += power2(elem);
+    });
+    return acc;
 }
