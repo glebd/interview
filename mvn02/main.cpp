@@ -28,3 +28,47 @@ int binarian(const vector<int>& input)
     });
     return acc;
 }
+
+int numBits(int n)
+{
+    int bits = 0;
+    for (int i = 0; i < sizeof(n) * 8; ++i) {
+        if (n & 1<<i)
+            ++bits;
+    }
+    return bits;
+}
+
+//
+// 1. Compute binarian value of the input array.
+// 2. Count bits in the result. This is the minimum no. of powers of 2 to represent it.
+//
+int solution(const vector<int>& input)
+{
+    if (input.size() == 0) return 0;
+    if (input.size() == 1 && input[0] < 1) return 0;
+    return numBits(binarian(input));
+}
+
+// ====== TESTS ======
+
+TEST_CASE("Test 00")
+{
+    vector<int> input{0};
+    auto expected = solution(input);
+    CHECK(expected == 0);
+}
+
+TEST_CASE("Test 01")
+{
+    vector<int> input{1};
+    auto expected = solution(input);
+    CHECK(expected == 1);
+}
+
+TEST_CASE("Test 02")
+{
+    vector<int> input{1, 1, 2, 2, 2}; // binarian == 16
+    auto expected = solution(input);
+    CHECK(expected == 1); // 2^4 == 16
+}
