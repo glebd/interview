@@ -24,6 +24,12 @@ struct Foo
     , b(B)
     {
     }
+
+    friend std::ostream& operator<<(std::ostream& os, Foo const& foo)
+    {
+        os << "Foo{" << foo.a << "," << foo.b << "}";
+        return os;
+    }
 };
 
 using FooVec = std::vector<Foo>;
@@ -31,19 +37,6 @@ using FooPtr = std::shared_ptr<Foo>;
 using FooPtrVec = std::vector<FooPtr>;
 
 namespace foo {
-
-string print(Foo const& foo)
-{
-    std::ostringstream os;
-    os << "Foo{" << foo.a << "," << foo.b << "}";
-    return os.str();
-}
-
-std::ostream& operator<<(std::ostream& os, Foo const& foo)
-{
-    os << print(foo);
-    return os;
-}
 
 template<typename T>
 std::ostream& operator<<(std::ostream& os, std::shared_ptr<T> const& sp)
