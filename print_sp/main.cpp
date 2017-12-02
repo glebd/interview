@@ -45,21 +45,12 @@ std::ostream& operator<<(std::ostream& os, Foo const& foo)
     return os;
 }
 
-//template<typename T, template<typename> class C>
-//std::ostream& operator<<(std::ostream& os, C<T> const& ct)
-//{
-//    auto foo = *ct;
-//    os << foo;
-//    return os;
-//}
-//
-//template<template<typename> class C>
-//std::ostream& operator<<(std::ostream& os, C<Foo> const& ct)
-//{
-//    auto foo = *ct;
-//    os << foo;
-//    return os;
-//}
+template<typename T>
+std::ostream& operator<<(std::ostream& os, std::shared_ptr<T> const& sp)
+{
+    os << *sp;
+    return os;
+}
 
 template<typename T, typename A, template<typename, typename...> class C>
 std::ostream& operator<<(std::ostream& os, C<T, A> const& ts)
@@ -85,17 +76,17 @@ int main()
 
     // print a single object
     Foo x{1, 2};
-    cout << "Foo" << x << "\n";
+    cout << "Foo: " << x << "\n";
 
     // print a single object in a shared_ptr
-//    auto wrapped_foo = std::make_shared<Foo>(3, 4);
-//    cout << wrapped_foo << "\n";
+    auto sp = std::make_shared<Foo>(3, 4);
+    cout << "FooPtr: " << sp << "\n";
 
     // print a vector of objects
     FooVec xs{Foo{1,2}, Foo{3,4}};
     cout << "Foos: " << xs << "\n";
 
-    // TODO: print a vector of objects wrapped in shared_ptr
+    // print a vector of objects wrapped in shared_ptr
     FooPtrVec ys{std::make_shared<Foo>(5,6),std::make_shared<Foo>(7,8)};
     cout << "FooPtrVec: " << ys << "\n";
 
