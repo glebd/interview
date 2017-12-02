@@ -2,6 +2,10 @@
  * This example is about figuring out how ADL works when overloading stream
  * output operators for custom types and containers.
  *
+ * C++14
+ *
+ * Builds with Clang from Xcode 9.1
+ *
  * Written by Gleb Dolgich, 2017-12-01
  */
 
@@ -78,10 +82,18 @@ int main()
     // print a vector of objects
     FooVec xs{Foo{1,2}, Foo{3,4}};
     cout << "Foos: " << xs << "\n";
+    //^^^^^^^^^^^^^^^^^^^^
+    // CLion 2017.3 incorrectly shows a red error line here:
+    // Binary operator '<<' can't be applied to the expression of type
+    // 'std::basic_ostream<char, std::char_traits<char>>' and 'FooVec'
 
     // print a vector of objects wrapped in shared_ptr
     FooPtrVec ys{std::make_shared<Foo>(5,6),std::make_shared<Foo>(7,8)};
     cout << "FooPtrVec: " << ys << "\n";
+    //^^^^^^^^^^^^^^^^^^^^^^^^^
+    // CLion 2017.3 incorrectly shows a red error line here:
+    // Binary operator '<<' can't be applied to the expression of type
+    // 'std::basic_ostream<char, std::char_traits<char>>' and 'FooPtrVec'
 
     return 0;
 }
