@@ -14,32 +14,33 @@
 
 using namespace std;
 
-int power2(int exp)
+long power2(long exp)
 {
-    int result = 1;
+    long result = 1;
     for (int i = 1; i <= exp; ++i) {
         result *= 2;
     }
     return result;
 }
 
-int numBits(int n)
+int numBits(long long n)
 {
     int bits = 0;
-    for (int i = 0; i < sizeof(n) * 8; ++i) {
-        if (n & 1<<i)
-            ++bits;
+    while (n) {
+        if (n & 1) ++bits;
+        n >>= 1;
     }
     return bits;
 }
 
 int solve(const vector<int>& input)
 {
-    int acc = 0;
+    long long acc = 0;
     for_each(begin(input), end(input), [&acc](int elem) {
         acc += power2(elem);
     });
     acc *= 3;
+
     return numBits(acc);
 }
 
@@ -83,6 +84,11 @@ TEST_CASE("NumBits test 4")
     CHECK(numBits(1024) == 1);
 }
 
+TEST_CASE("NumBits test 5")
+{
+    CHECK(numBits(150) == 4);
+}
+
 TEST_CASE("Sample 1")
 {
     vector<int> input{0};
@@ -109,4 +115,11 @@ TEST_CASE("Sample 4")
     vector<int> input{2, 3, 5};
     auto actual = solve(input);
     CHECK(actual == 2);
+}
+
+TEST_CASE("Sample Codility")
+{
+    vector<int> input{1, 4, 5};
+    auto actual = solve(input);
+    CHECK(actual == 4);
 }

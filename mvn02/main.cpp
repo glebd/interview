@@ -29,12 +29,12 @@ int binarian(const vector<int>& input)
     return acc;
 }
 
-int numBits(int n)
+int numBits(long long n)
 {
     int bits = 0;
-    for (int i = 0; i < sizeof(n) * 8; ++i) {
-        if (n & 1<<i)
-            ++bits;
+    while (n) {
+        if (n & 1) ++bits;
+        n >>= 1;
     }
     return bits;
 }
@@ -45,7 +45,7 @@ int numBits(int n)
 //
 int solution(const vector<int>& input)
 {
-    if (input.size() == 0) return 0;
+    if (input.empty()) return 0;
     if (input.size() == 1 && input[0] < 1) return 0;
     return numBits(binarian(input));
 }
@@ -71,4 +71,25 @@ TEST_CASE("Test 02")
     vector<int> input{1, 1, 2, 2, 2}; // binarian == 16
     auto expected = solution(input);
     CHECK(expected == 1); // 2^4 == 16
+}
+
+TEST_CASE("Test 03")
+{
+    vector<int> input{1, 1, 1, 1, 1, 1}; // binarian == 12
+    auto expected = solution(input);
+    CHECK(expected == 2); // 2^3 + 2^2
+}
+
+TEST_CASE("Test 04")
+{
+    vector<int> input; // binarian == 0
+    auto expected = solution(input);
+    CHECK(expected == 0);
+}
+
+TEST_CASE("Test Codility")
+{
+    vector<int> input{1, 0, 2, 0, 0, 2}; // binarian == 13: 1101
+    auto expected = solution(input);
+    CHECK(expected == 3); // 2^4 == 16
 }
