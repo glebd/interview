@@ -46,17 +46,17 @@ std::ostream& operator<<(std::ostream& os, Foo const& foo)
 }
 
 //template<typename T, template<typename> class C>
-//std::ostream& operator<<(std::ostream& os, C<T> const& wrapped_foo)
+//std::ostream& operator<<(std::ostream& os, C<T> const& ct)
 //{
-//    auto foo = *wrapped_foo;
+//    auto foo = *ct;
 //    os << foo;
 //    return os;
 //}
 //
 //template<template<typename> class C>
-//std::ostream& operator<<(std::ostream& os, C<Foo> const& wrapped_foo)
+//std::ostream& operator<<(std::ostream& os, C<Foo> const& ct)
 //{
-//    auto foo = *wrapped_foo;
+//    auto foo = *ct;
 //    os << foo;
 //    return os;
 //}
