@@ -83,7 +83,7 @@ int main()
     FooVec xs{Foo{1,2}, Foo{3,4}};
     cout << "Foos: " << xs << "\n";
     //^^^^^^^^^^^^^^^^^^^^
-    // CLion 2017.3 incorrectly shows a red error line here:
+    // CLion 2017.3.1 incorrectly shows a red error line here:
     // Binary operator '<<' can't be applied to the expression of type
     // 'std::basic_ostream<char, std::char_traits<char>>' and 'FooVec'
 
@@ -91,7 +91,7 @@ int main()
     FooPtrVec ys{std::make_shared<Foo>(5,6),std::make_shared<Foo>(7,8)};
     cout << "FooPtrVec: " << ys << "\n";
     //^^^^^^^^^^^^^^^^^^^^^^^^^
-    // CLion 2017.3 incorrectly shows a red error line here:
+    // CLion 2017.3.1 incorrectly shows a red error line here:
     // Binary operator '<<' can't be applied to the expression of type
     // 'std::basic_ostream<char, std::char_traits<char>>' and 'FooPtrVec'
 
