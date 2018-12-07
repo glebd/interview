@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 2.8)
-
+cmake_minimum_required(VERSION 2.8.12)
 project(roman-numerals)
+add_definitions("-std=c++17")
+include(build/conanbuildinfo.cmake)
+conan_basic_setup()
 add_executable(${PROJECT_NAME} "main.cpp")
+target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
