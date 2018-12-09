@@ -39,15 +39,13 @@ string answer_for_number(int num, char c1, char c5, char c10)
         out << c1 << c10;
     } else if (num >= 5 && num <= 8) {
         out << c5;
-        for (int i=6; i<=num; ++i) {
+        for (int i=6; i<=num; ++i)
             out << c1;
-        }
     } else if (num == 4) {
         out << c1 << c5;
     } else {
-        for (int i=0; i<num; ++i) {
+        for (int i=0; i<num; ++i)
             out << c1;
-        }
     }
     return out.str();
 }
@@ -56,17 +54,16 @@ string answer(int n)
 {
     stringstream out;
     int thousands = n/1000;
-    for (int i=0; i<thousands; ++i) {
+    for (int i=0; i<thousands; ++i)
         out << "M";
-    }
-    int remainder = n-1000*thousands;
-    int hundreds = remainder/100;
+    n -= 1000*thousands;
+    int hundreds = n/100;
     out << answer_for_number(hundreds, 'C', 'D', 'M');
-    remainder -= hundreds*100;
-    int tens = remainder/10;
+    n -= hundreds*100;
+    int tens = n/10;
     out << answer_for_number(tens, 'X', 'L', 'C');
-    remainder -= tens*10;
-    out << answer_for_number(remainder, 'I', 'V', 'X');
+    n -= tens*10;
+    out << answer_for_number(n, 'I', 'V', 'X');
     return out.str();
 }
 
