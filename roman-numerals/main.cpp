@@ -56,13 +56,13 @@ string answer(int n)
     int thousands = n/1000;
     for (int i=0; i<thousands; ++i)
         out << "M";
-    n -= 1000*thousands;
+    n %= 1000;
     int hundreds = n/100;
     out << answer_for_number(hundreds, 'C', 'D', 'M');
-    n -= hundreds*100;
+    n %= 100;
     int tens = n/10;
     out << answer_for_number(tens, 'X', 'L', 'C');
-    n -= tens*10;
+    n %= 10;
     out << answer_for_number(n, 'I', 'V', 'X');
     return out.str();
 }
