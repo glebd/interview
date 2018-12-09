@@ -61,12 +61,12 @@ string answer(int n)
     }
     int remainder = n-1000*thousands;
     int hundreds = remainder/100;
-    out << answer_for_number(hundreds, 'C', 'D', 'M');;
+    out << answer_for_number(hundreds, 'C', 'D', 'M');
     remainder -= hundreds*100;
     int tens = remainder/10;
-    out << answer_for_number(tens, 'X', 'L', 'C');;
+    out << answer_for_number(tens, 'X', 'L', 'C');
     remainder -= tens*10;
-    out << answer_for_number(remainder, 'I', 'V', 'X');;
+    out << answer_for_number(remainder, 'I', 'V', 'X');
     return out.str();
 }
 
