@@ -19,6 +19,17 @@ Examples:
 8 -> "VIII" | 80 -> "LXXX" | 800 -> "DCCC" |
 9 ->   "IX" | 90 ->   "XC" | 900 ->   "CM" |
 
+ IIIVIIIXXXLXXXCCCDCCCMMMM
+1^
+2^^
+3^^^
+4  ^^
+5   ^
+6   ^^
+7   ^^^
+8   ^^^^
+9      ^^
+
 1990 -> "MCMXC"  (1000 -> "M"  + 900 -> "CM" + 90 -> "XC")
 2008 -> "MMVIII" (2000 -> "MM" + 8 -> "VIII")
   99 -> "XCIX"   (90 -> "XC" + 9 -> "IX")
