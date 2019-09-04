@@ -19,17 +19,6 @@ Examples:
 8 -> "VIII" | 80 -> "LXXX" | 800 -> "DCCC" |
 9 ->   "IX" | 90 ->   "XC" | 900 ->   "CM" |
 
- IIIVIIIXXXLXXXCCCDCCCMMMM
-1^
-2^^
-3^^^
-4  ^^
-5   ^
-6   ^^
-7   ^^^
-8   ^^^^
-9      ^^
-
 1990 -> "MCMXC"  (1000 -> "M"  + 900 -> "CM" + 90 -> "XC")
 2008 -> "MMVIII" (2000 -> "MM" + 8 -> "VIII")
   99 -> "XCIX"   (90 -> "XC" + 9 -> "IX")
@@ -38,10 +27,69 @@ Examples:
 
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <string>
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
 
 using namespace std;
+
+struct Roman_number
+{
+    int value{0};
+    std::string text{};
+};
+
+string answer_2(int n)
+{
+    ostringstream oss;
+
+    static const std::vector<Roman_number> roman_map =
+    {
+        {4000, "MMMM"},
+        {3000, "MMM"},
+        {2000, "MM"},
+        {1000, "M"},
+        {900, "CM"},
+        {800, "DCCC"},
+        {700, "DCC"},
+        {600, "DC"},
+        {500, "D"},
+        {400, "CD"},
+        {300, "CCC"},
+        {200, "CC"},
+        {100, "C"},
+        {90, "XC"},
+        {80, "LXXX"},
+        {70, "LXX"},
+        {60, "LX"},
+        {50, "L"},
+        {40, "XL"},
+        {30, "XXX"},
+        {20, "XX"},
+        {10, "X"},
+        {9, "IX"},
+        {8, "VIII"},
+        {7, "VII"},
+        {6, "VI"},
+        {5, "V"},
+        {4, "IV"},
+        {3, "III"},
+        {2, "II"},
+        {1, "I"}
+    };
+
+    for_each(begin(roman_map), end(roman_map), [&n, &oss](const auto& roman_number)
+    {
+        if (n >= roman_number.value)
+        {
+            n -= roman_number.value;
+            oss << roman_number.text;
+        }
+    });
+
+    return oss.str();
+}
 
 string answer_for_number(int num, char c1, char c5, char c10)
 {
@@ -61,7 +109,7 @@ string answer_for_number(int num, char c1, char c5, char c10)
     return out.str();
 }
 
-string answer(int n)
+string answer_1(int n)
 {
     stringstream out;
     int thousands = n/1000;
@@ -76,6 +124,24 @@ string answer(int n)
     n %= 10;
     out << answer_for_number(n, 'I', 'V', 'X');
     return out.str();
+}
+
+/*
+ IIIVIIIXXXLXXXCCCDCCCMMMM
+1^
+2^^
+3^^^
+4  ^^
+5   ^
+6   ^^
+7   ^^^
+8   ^^^^
+9      ^^
+*/
+
+string answer(int n)
+{
+    return answer_2(n);
 }
 
 TEST_CASE("1")
