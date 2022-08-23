@@ -9,20 +9,17 @@ class Widget {};
 // The original question had a non-const reference as parameter.
 // In this case both calls to this function in main() would cause a compiler error.
 //
-// If we make the parameter a const reference, then both calls compile because:
-// (1) an lvalue is no longer required, and
-// (2) a raw pointer is implicitly wrapped in a shared_ptr.
+// If we make the parameter a const reference, then 2nd call compiles because an
+// lvalue is no longer required.
 //
-// => Either the question was not formulated clearly,
-// or they were not sure about this themselves.
+// One of the interviewers said that shared_ptr constructor was defined as
+// explicit. This prevents 1st call from compiling.
 //
-// (One of the interviewers said that shared_ptr constructor was defined as explicit --
-// which is true but doesn't prevent implicit creation of a temporary shared_ptr.)
-void f(const shared_ptr<Widget>& w) {}
+void f(shared_ptr<Widget>& w) {}
 
 int main()
 {
-    f(new Widget);
-    f(make_shared<Widget>());
+    f(new Widget); // no implicit conversion from T* to shared_ptr<T>
+    f(make_shared<Widget>()); // can't use rvalue when an lvalue is required
     return 0;
 }
